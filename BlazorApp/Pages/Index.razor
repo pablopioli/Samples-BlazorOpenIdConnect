@@ -1,0 +1,45 @@
+﻿@page "/"
+
+<AuthorizeView>
+    <Authorizing>
+        <h3>Authentication in progress</h3>
+    </Authorizing>
+    <Authorized>
+        <ul class="nav nav-tabs mb-3" role="tablist">
+            <li class="nav-item">
+                <a @onclick="ShowClaims" class="nav-link @(_showClaims ? "active": "")" role="tab" href="javascript:void(0)">User Claims</a>
+            </li>
+            <li class="nav-item">
+                <a @onclick="ShowApi" class="nav-link @(_showClaims ? "" : "active")" role="tab" href="javascript:void(0)">Test API</a>
+            </li>
+        </ul>
+        <div class="tab-content">
+            @if (_showClaims)
+            {
+                <div class="tab-pane fade show active" role="tabpanel"><About /></div>
+            }
+            else
+            {
+                <div class="tab-pane fade show active" role="tabpanel"><Api /></div>
+            }
+        </div>
+    </Authorized>
+    <NotAuthorized>
+        <h3>You're not currently authenticated</h3>
+        You can login to the
+        <a href="https://demo.identityserver.io/" target="_blank">Identity Server</a> demo instance
+        using your google account or one of the following <span class="font-weight-bold">test</span> users:
+        <ul>
+            <li>alice/alice</li>
+            <li>bob/bob</li>
+        </ul>
+    </NotAuthorized>
+</AuthorizeView>
+
+@code
+{
+    bool _showClaims = true;
+
+    void ShowClaims() => _showClaims = true;
+    void ShowApi() => _showClaims = false;
+}

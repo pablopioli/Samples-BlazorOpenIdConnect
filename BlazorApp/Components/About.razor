@@ -1,0 +1,19 @@
+﻿@inject Sotsera.Blazor.Oidc.IUserManager UserManager
+
+<table class="table table-sm small">
+    <thead class="thead-dark">
+        <tr>
+            <th>Key</th>
+            <th>Value</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var key in UserManager.User.Data.Keys.OrderBy(x=>x))
+        {
+            <tr>
+                <td>@key</td>
+                <td>@UserManager.User.Data[key]</td>
+            </tr>
+        }
+    </tbody>
+</table>
